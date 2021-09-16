@@ -1,4 +1,4 @@
-package com.mavlushechka.solutions.university;
+package com.mavlushechka.solutions.university._1;
 
 class Student {
     private final int id;
@@ -27,7 +27,7 @@ class Student {
     }
 }
 
-public class _1 {
+public class _9 {
     public static void main(String[] args) {
         Student student1 = new Student(1, "John", "Doe", "21.01.2002", 88005553535L);
         Student student2 = new Student(2, "Andrew", "Doe", "01.01.1999", 88005553535L);
