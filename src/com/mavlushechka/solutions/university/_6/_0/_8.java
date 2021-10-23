@@ -1,4 +1,4 @@
-package com.mavlushechka.solutions.university._6;
+package com.mavlushechka.solutions.university._6._0;
 
 class Safe {
     private String encryptedText;
