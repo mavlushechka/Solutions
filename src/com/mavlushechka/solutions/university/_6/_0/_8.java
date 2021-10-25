@@ -31,7 +31,6 @@ class Safe {
 public class _8 {
 
     public static void main(String[] args) {
-        Safe safe = new Safe("Java", 3);
-        System.out.println(safe);
+        System.out.println(new Safe("Java", 3));
     }
 }
