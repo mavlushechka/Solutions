@@ -21,8 +21,7 @@ public class SimpleChattyBot {
     }
 
     static void remindName() {
-        String name = scanner.nextLine();
-        System.out.println("What a great name you have, " + name + "!");
+        System.out.println("What a great name you have, " + scanner.nextLine() + "!");
     }
 
     static void guessAge() {
