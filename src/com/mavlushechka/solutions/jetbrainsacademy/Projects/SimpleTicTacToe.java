@@ -4,11 +4,11 @@ import java.util.Scanner;
 
 public final class SimpleTicTacToe {
 
-    private final char[][] cells = new char[3][3];
+    private final char[][] cells = {{' ', ' ', ' '}, {' ', ' ', ' '}, {' ', ' ', ' '}};
 
-    private char currentPlayer;
+    private char currentPlayer = 'X';
 
-    private boolean gameFinished;
+    private boolean gameFinished = false;
 
     private Character winner;
 
