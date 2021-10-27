@@ -26,8 +26,12 @@ public final class SimpleTicTacToe {
 
     private void showGrid() {
         System.out.println("---------");
-        for (char[] cell : cells) {
-            System.out.println("| " + cell[0] + " " + cell[1] + " " + cell[2] + " |");
+        for (char[] oneLineCells : cells) {
+            System.out.print("| ");
+            for (char cell : oneLineCells) {
+                System.out.printf("%c ", cell);
+            }
+            System.out.print("|\n");
         }
         System.out.println("---------");
     }
