@@ -1,85 +1,47 @@
 package com.mavlushechka.solutions.jetbrainsacademy.Projects;
 
-import java.util.Arrays;
 import java.util.Scanner;
 
 public final class SimpleTicTacToe {
 
-    private static final Scanner scanner = new Scanner(System.in);
+    private final char[][] cells = new char[3][3];
 
-    private static final char[][] cells = new char[3][3];
+    private char currentPlayer;
 
-    private static char winner;
+    private boolean gameFinished;
 
-    private static byte countOfX;
+    private Character winner;
 
-    private static byte countOfO;
+    private final Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
-        enterCells();
-        showGrid();
-        check();
+        SimpleTicTacToe simpleTicTacToe = new SimpleTicTacToe();
+        simpleTicTacToe.startGame();
     }
 
-    private static void enterCells() {
-        System.out.print("Enter cells: ");
-        char[] oneLineCells = scanner.nextLine().toCharArray();
-        for (byte i = 0; i < 3; i++)
-            cells[i] = Arrays.copyOfRange(oneLineCells, i*3, i*3+3);
-    }
-
-    private static void showGrid() {
-        System.out.println("---------");
-        for (char[] cell : cells)
-            System.out.println("| " + cell[0] + " " + cell[1] + " " + cell[2] + " |");
-        System.out.println("---------");
-    }
-
-    private static void check() {
-        byte numberOfWins = 0;
-        boolean gameFinished = !(Arrays.toString(cells[0]).contains("_")
-                || Arrays.toString(cells[1]).contains("_")
-                || Arrays.toString(cells[2]).contains("_"));
-
-        for (byte i = 0, j = 2; i < 3; i += 2, j -= 2) {
-            if ((cells[i][0] != '_' && cells[i][0] != ' ') && (cells[i][0] == cells[1][1] && cells[1][1] == cells[j][2])) {
-                gameFinished = true;
-                winner = cells[0][0];
-                numberOfWins++;
-            }
-        }
+    public SimpleTicTacToe() {
         for (byte i = 0; i < 3; i++) {
             for (byte j = 0; j < 3; j++) {
-                switch (cells[i][j]) {
-                    case 'X' -> countOfX++;
-                    case 'O' -> countOfO++;
-                }
+                cells[i][j] = ' ';
             }
         }
-        for (byte i = 0; i < 3; i++) {
-            if ((cells[i][0] != '_' && cells[i][0] != ' ') && ((cells[i][0] == cells[i][1] && cells[i][1] == cells[i][2]) ||
-                    (cells[0][i] == cells[1][i] && cells[1][i] == cells[2][i]))) {
-                gameFinished = true;
-                winner = ((cells[i][0] == cells[i][1] && cells[i][1] == cells[i][2])) ? cells[i][0] : cells[0][i];
-                numberOfWins++;
-            }
-        }
-
-        if (countOfX > countOfO+1 || countOfX+1 < countOfO) {
-            System.out.println("Impossible");
-        } else if (gameFinished) {
-            switch (numberOfWins) {
-                case 0 -> System.out.println("Draw");
-                case 1 -> System.out.println(winner + " wins");
-                default -> System.out.println("Impossible");
-            }
-        } else {
-            enter();
-            showGrid();
-        }
+        currentPlayer = 'X';
     }
 
-    private static void enter() {
+    public void startGame() {
+        showGrid();
+        enterCoordinates();
+    }
+
+    private void showGrid() {
+        System.out.println("---------");
+        for (char[] cell : cells) {
+            System.out.println("| " + cell[0] + " " + cell[1] + " " + cell[2] + " |");
+        }
+        System.out.println("---------");
+    }
+
+    private void enterCoordinates() {
         byte y;
         byte x;
 
@@ -90,18 +52,69 @@ public final class SimpleTicTacToe {
             x = Byte.parseByte(tempCoordinates.split(" ")[1]);
         } catch (Exception exception) {
             System.out.println("You should enter numbers!");
-            enter();
+            enterCoordinates();
             return;
         }
 
+        showEnterInfo(y, x);
+    }
+
+    private void showEnterInfo(byte y, byte x) {
         if (!((y >= 1 && y <= 3) && (x >= 1 && x <= 3))) {
             System.out.println("Coordinates should be from 1 to 3!");
-            enter();
-        } else if (cells[y-1][x-1] != '_' && cells[y-1][x-1] != ' ') {
+            enterCoordinates();
+        } else if (cells[y-1][x-1] != ' ') {
             System.out.println("This cell is occupied! Choose another one!");
-            enter();
+            enterCoordinates();
         } else {
-            cells[y-1][x-1] = 'X';
+            cells[y-1][x-1] = currentPlayer;
+            currentPlayer = (currentPlayer == 'X') ? 'O' : 'X';
+
+            showGrid();
+
+            checkLines();
+            if (!gameFinished) {
+                enterCoordinates();
+            } else {
+                System.out.print(getResult());
+            }
         }
+    }
+
+    private void checkLines() {
+        for (byte i = 0, j = 2; i < 3; i += 2, j -= 2) {
+            if (cells[i][0] != ' ' && (cells[i][0] == cells[1][1] && cells[1][1] == cells[j][2])) {
+                gameFinished = true;
+                winner = cells[i][0];
+                break;
+            }
+        }
+        if (gameFinished) {
+            return;
+        }
+        for (byte i = 0; i < 3; i++) {
+            if (cells[i][0] != ' ' && ((cells[i][0] == cells[i][1] && cells[i][1] == cells[i][2]) ||
+                    cells[0][i] != ' ' && (cells[0][i] == cells[1][i] && cells[1][i] == cells[2][i]))) {
+                gameFinished = true;
+                winner = ((cells[i][0] == cells[i][1] && cells[i][1] == cells[i][2])) ? cells[i][0] : cells[0][i];
+            }
+        }
+        if (gameFinished) {
+            return;
+        }
+        for (byte i = 0, fullCells = 9; i < 3; i++) {
+            for (byte j = 0; j < 3; j++) {
+                if (cells[i][j] != ' ') {
+                    fullCells--;
+                }
+            }
+            if (fullCells == 0) {
+                gameFinished = true;
+            }
+        }
+    }
+
+    private String getResult() {
+        return winner == null ? "Draw" : winner + " wins";
     }
 }
