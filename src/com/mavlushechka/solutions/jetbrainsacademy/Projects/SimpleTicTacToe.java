@@ -21,7 +21,7 @@ public final class SimpleTicTacToe {
 
     public void startGame() {
         showGrid();
-        enterCoordinates();
+        enterCell();
     }
 
     private void showGrid() {
@@ -32,10 +32,7 @@ public final class SimpleTicTacToe {
         System.out.println("---------");
     }
 
-    private void enterCoordinates() {
-        byte y;
-        byte x;
-
+    private void enterCell() {
         System.out.print("Enter the coordinates: ");
         try {
             String tempCoordinates = scanner.nextLine();
@@ -43,7 +40,7 @@ public final class SimpleTicTacToe {
             x = Byte.parseByte(tempCoordinates.split(" ")[1]);
         } catch (Exception exception) {
             System.out.println("You should enter numbers!");
-            enterCoordinates();
+            enterCell();
             return;
         }
 
@@ -53,10 +50,10 @@ public final class SimpleTicTacToe {
     private void showEnterInfo(byte y, byte x) {
         if (!((y >= 1 && y <= 3) && (x >= 1 && x <= 3))) {
             System.out.println("Coordinates should be from 1 to 3!");
-            enterCoordinates();
+            enterCell();
         } else if (cells[y-1][x-1] != ' ') {
             System.out.println("This cell is occupied! Choose another one!");
-            enterCoordinates();
+            enterCell();
         } else {
             cells[y-1][x-1] = currentPlayer;
             currentPlayer = (currentPlayer == 'X') ? 'O' : 'X';
@@ -65,7 +62,7 @@ public final class SimpleTicTacToe {
 
             checkLines();
             if (!gameFinished) {
-                enterCoordinates();
+                enterCell();
             } else {
                 System.out.print(getResult());
             }
