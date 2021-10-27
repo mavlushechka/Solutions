@@ -19,15 +19,6 @@ public final class SimpleTicTacToe {
         simpleTicTacToe.startGame();
     }
 
-    public SimpleTicTacToe() {
-        for (byte i = 0; i < 3; i++) {
-            for (byte j = 0; j < 3; j++) {
-                cells[i][j] = ' ';
-            }
-        }
-        currentPlayer = 'X';
-    }
-
     public void startGame() {
         showGrid();
         enterCoordinates();
