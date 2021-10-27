@@ -55,10 +55,6 @@ public final class SimpleTicTacToe {
             return;
         }
 
-        showEnterInfo(y, x);
-    }
-
-    private void showEnterInfo(byte y, byte x) {
         if (!((y >= 1 && y <= 3) && (x >= 1 && x <= 3))) {
             System.out.println("Coordinates should be from 1 to 3!");
             enterCell();
