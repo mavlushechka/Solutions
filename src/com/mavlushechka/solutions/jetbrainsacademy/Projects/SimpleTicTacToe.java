@@ -38,10 +38,17 @@ public final class SimpleTicTacToe {
 
     private void enterCell() {
         System.out.print("Enter the coordinates: ");
+        String coordinates = scanner.nextLine();
+
+        showEnterInfo(coordinates);
+    }
+
+    private void showEnterInfo(String coordinates) {
+        byte y, x;
+
         try {
-            String tempCoordinates = scanner.nextLine();
-            y = Byte.parseByte(tempCoordinates.split(" ")[0]);
-            x = Byte.parseByte(tempCoordinates.split(" ")[1]);
+            y = Byte.parseByte(coordinates.split(" ")[0]);
+            x = Byte.parseByte(coordinates.split(" ")[1]);
         } catch (Exception exception) {
             System.out.println("You should enter numbers!");
             enterCell();
