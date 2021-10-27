@@ -93,6 +93,10 @@ public final class SimpleTicTacToe {
         if (gameFinished) {
             return;
         }
+        isCellsAreFull();
+    }
+
+    private void isCellsAreFull() {
         for (byte i = 0, fullCells = 9; i < 3; i++) {
             for (byte j = 0; j < 3; j++) {
                 if (cells[i][j] != ' ') {
