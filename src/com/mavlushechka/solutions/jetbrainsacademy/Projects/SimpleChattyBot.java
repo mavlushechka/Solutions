@@ -21,8 +21,9 @@ public class SimpleChattyBot {
         System.out.printf("Hello! My name is %s.\nI was created in %d.\n", NAME, CREATED_YEAR);
     }
 
-    static void remindName() {
-        System.out.println("What a great name you have, " + scanner.nextLine() + "!");
+    private void remindName() {
+        System.out.println("Please, remind me your name.");
+        System.out.printf("What a great name you have, %s!\n", scanner.nextLine());
     }
 
     static void guessAge() {
