@@ -4,7 +4,9 @@ import java.util.Scanner;
 
 public class SimpleChattyBot {
 
-    final static Scanner scanner = new Scanner(System.in);
+    public final String NAME = "AniMarfo";
+
+    public final int CREATED_YEAR = 2021;
 
     public static void main(String[] args) {
         greet("AniMarfo", "2021");
