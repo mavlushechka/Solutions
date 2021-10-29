@@ -28,14 +28,13 @@ public class SimpleChattyBot {
         System.out.printf("What a great name you have, %s!\n", scanner.nextLine());
     }
 
-    static void guessAge() {
-        System.out.println("Let me guess your age.");
-        System.out.println("Enter remainders of dividing your age by 3, 5 and 7.");
-        int rem3 = scanner.nextInt();
-        int rem5 = scanner.nextInt();
-        int rem7 = scanner.nextInt();
-        int age = (rem3 * 70 + rem5 * 21 + rem7 * 15) % 105;
-        System.out.println("Your age is " + age + "; that's a good time to start programming!");
+    private void guessAge() {
+        System.out.println("Let me guess your age.\nEnter remainders of dividing your age by 3, 5 and 7.");
+        int remainder3 = scanner.nextInt();
+        int remainder5 = scanner.nextInt();
+        int remainder7 = scanner.nextInt();
+        int age = (remainder3 * 70 + remainder5 * 21 + remainder7 * 15) % 105;
+        System.out.printf("Your age is %d; that's a good time to start programming!\n", age);
     }
 
     static void count() {
