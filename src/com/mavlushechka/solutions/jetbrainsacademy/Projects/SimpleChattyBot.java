@@ -17,10 +17,8 @@ public class SimpleChattyBot {
         end();
     }
 
-    static void greet(String assistantName, String birthYear) {
-        System.out.println("Hello! My name is " + assistantName + ".");
-        System.out.println("I was created in " + birthYear + ".");
-        System.out.println("Please, remind me your name.");
+    private void greet() {
+        System.out.printf("Hello! My name is %s.\nI was created in %d.\n", NAME, CREATED_YEAR);
     }
 
     static void remindName() {
