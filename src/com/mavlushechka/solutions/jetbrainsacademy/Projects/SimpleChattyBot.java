@@ -56,8 +56,4 @@ public class SimpleChattyBot {
             System.out.println("Please, try again.");
         }
     }
-
-    static void end() {
-        System.out.println("Congratulations, have a nice day!");
-    }
 }
