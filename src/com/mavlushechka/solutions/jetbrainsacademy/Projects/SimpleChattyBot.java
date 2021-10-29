@@ -57,3 +57,11 @@ public class SimpleChattyBot {
         System.out.println("Congratulations, have a nice day!");
     }
 }
+
+class Main {
+
+    public static void main(String[] args) {
+        SimpleChattyBot simpleChattyBot = new SimpleChattyBot();
+        simpleChattyBot.start();
+    }
+}
