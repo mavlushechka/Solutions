@@ -55,5 +55,6 @@ public class SimpleChattyBot {
         while (scanner.nextByte() != 2) {
             System.out.println("Please, try again.");
         }
+        System.out.println("Congratulations, have a nice day!");
     }
 }
