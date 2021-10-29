@@ -16,7 +16,6 @@ public class SimpleChattyBot {
         guessAge();
         count();
         test();
-        end();
     }
 
     private void greet() {
