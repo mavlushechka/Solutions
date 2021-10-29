@@ -5,7 +5,7 @@ import java.util.Set;
 
 public class DeclaringAMethodVowelOrNot {
 
-    private final static Set<Character> VOWEL_LETTERS = Set.of('A', 'E', 'I', 'O', 'U', 'W');
+    private static final Set<Character> VOWEL_LETTERS = Set.of('A', 'E', 'I', 'O', 'U', 'W');
 
     public static boolean isVowel(char letter) {
         return VOWEL_LETTERS.contains(Character.toUpperCase(letter));
