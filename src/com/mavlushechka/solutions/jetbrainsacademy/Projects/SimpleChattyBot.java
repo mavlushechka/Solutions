@@ -8,8 +8,10 @@ public class SimpleChattyBot {
 
     public final int CREATED_YEAR = 2021;
 
-    public static void main(String[] args) {
-        greet("AniMarfo", "2021");
+    private final Scanner scanner = new Scanner(System.in);
+
+    public void start() {
+        greet();
         remindName();
         guessAge();
         count();
