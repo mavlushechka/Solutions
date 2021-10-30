@@ -17,11 +17,11 @@ public final class SimpleTicTacToe {
     private Character winner;
 
     public void startGame() {
-        showGrid();
+        showCells();
         enterCell();
     }
 
-    private void showGrid() {
+    private void showCells() {
         System.out.println("---------");
         for (char[] oneLineCells : cells) {
             System.out.print("| ");
