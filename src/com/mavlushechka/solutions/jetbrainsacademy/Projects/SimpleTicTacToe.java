@@ -16,13 +16,6 @@ public final class SimpleTicTacToe {
 
     private Character winner;
 
-    private final Scanner scanner = new Scanner(System.in);
-
-    public static void main(String[] args) {
-        SimpleTicTacToe simpleTicTacToe = new SimpleTicTacToe();
-        simpleTicTacToe.startGame();
-    }
-
     public void startGame() {
         showGrid();
         enterCell();
