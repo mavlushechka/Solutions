@@ -85,7 +85,7 @@ public final class SimpleTicTacToe {
         if (gameFinished) {
             return;
         }
-        isCellsAreFull();
+        checkIfCellsAreFull();
     }
 
     private void checkDiagonalLines() {
@@ -108,7 +108,7 @@ public final class SimpleTicTacToe {
         }
     }
 
-    private void isCellsAreFull() {
+    private void checkIfCellsAreFull() {
         for (byte i = 0, fullCells = 9; i < 3; i++) {
             for (byte j = 0; j < 3; j++) {
                 if (cells[i][j] != ' ') {
