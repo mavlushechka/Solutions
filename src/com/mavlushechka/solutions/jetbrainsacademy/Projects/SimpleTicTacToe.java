@@ -41,18 +41,23 @@ public final class SimpleTicTacToe {
         System.out.print("Enter the coordinates: ");
         temporaryCoordinates = new Scanner(System.in).nextLine();
         try {
-            y = Byte.parseByte(coordinates.split(" ")[0]);
-            x = Byte.parseByte(coordinates.split(" ")[1]);
-        } catch (Exception exception) {
+            y = Byte.parseByte(temporaryCoordinates.split(" ")[0]);
+            x = Byte.parseByte(temporaryCoordinates.split(" ")[1]);
+
+            if (!((y >= 1 && y <= 3) && (x >= 1 && x <= 3))) {
+                throw new IncorrectCoordinatesDiapasonException("Incorrect coordinates");
+            } else if (cells[y-1][x-1] != ' ') {
+                throw new OccupiedCellException("Cell is occupied");
+            } else {
+                move(--y, --x);
+            }
+        } catch (NumberFormatException numberFormatException) {
             System.out.println("You should enter numbers!");
             enterCell();
-            return;
-        }
-
-        if (!((y >= 1 && y <= 3) && (x >= 1 && x <= 3))) {
+        } catch (IncorrectCoordinatesDiapasonException incorrectCoordinatesDiapasonException) {
             System.out.println("Coordinates should be from 1 to 3!");
             enterCell();
-        } else if (cells[y-1][x-1] != ' ') {
+        } catch (OccupiedCellException occupiedCellException) {
             System.out.println("This cell is occupied! Choose another one!");
             enterCell();
         } else {
