@@ -119,3 +119,23 @@ public final class SimpleTicTacToe {
         return winner == null ? "Draw" : winner + " wins";
     }
 }
+
+class IncorrectCoordinatesDiapasonException extends Exception {
+    public IncorrectCoordinatesDiapasonException(String errorMessage) {
+        super(errorMessage);
+    }
+}
+
+class OccupiedCellException extends Exception {
+    public OccupiedCellException(String errorMessage) {
+        super(errorMessage);
+    }
+}
+
+final class Runner {
+
+    public static void main(String[] args) {
+        SimpleTicTacToe simpleTicTacToe = new SimpleTicTacToe();
+        simpleTicTacToe.startGame();
+    }
+}
