@@ -4,9 +4,9 @@ import java.util.Scanner;
 
 public final class SimpleTicTacToe {
 
-    public static final char FIRST_PLAYER = 'X';
+    private static final char FIRST_PLAYER = 'X';
 
-    public static final char SECOND_PLAYER = 'O';
+    private static final char SECOND_PLAYER = 'O';
 
     private final char[][] cells = {{' ', ' ', ' '}, {' ', ' ', ' '}, {' ', ' ', ' '}};
 
