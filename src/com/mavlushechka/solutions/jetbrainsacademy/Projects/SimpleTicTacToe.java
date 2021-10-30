@@ -4,9 +4,13 @@ import java.util.Scanner;
 
 public final class SimpleTicTacToe {
 
+    public static final char FIRST_PLAYER = 'X';
+
+    public static final char SECOND_PLAYER = 'O';
+
     private final char[][] cells = {{' ', ' ', ' '}, {' ', ' ', ' '}, {' ', ' ', ' '}};
 
-    private char currentPlayer = 'X';
+    private char currentPlayer = FIRST_PLAYER;
 
     private boolean gameFinished = false;
 
