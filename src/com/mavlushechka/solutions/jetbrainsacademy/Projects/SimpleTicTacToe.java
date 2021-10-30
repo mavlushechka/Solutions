@@ -60,18 +60,19 @@ public final class SimpleTicTacToe {
         } catch (OccupiedCellException occupiedCellException) {
             System.out.println("This cell is occupied! Choose another one!");
             enterCell();
+        }
+    }
+
+    private void move(byte y, byte x) {
+        cells[y][x] = currentPlayer;
+        currentPlayer = (currentPlayer == FIRST_PLAYER) ? SECOND_PLAYER : FIRST_PLAYER;
+
+        showCells();
+        checkLines();
+        if (!gameFinished) {
+            enterCell();
         } else {
-            cells[y-1][x-1] = currentPlayer;
-            currentPlayer = (currentPlayer == 'X') ? 'O' : 'X';
-
-            showGrid();
-
-            checkLines();
-            if (!gameFinished) {
-                enterCell();
-            } else {
-                System.out.print(getResult());
-            }
+            System.out.print(getResult());
         }
     }
 
