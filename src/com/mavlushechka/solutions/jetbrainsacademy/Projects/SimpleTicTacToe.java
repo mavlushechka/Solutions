@@ -74,6 +74,18 @@ public final class SimpleTicTacToe {
     }
 
     private void checkLines() {
+        checkDiagonalLines();
+        if (gameFinished) {
+            return;
+        }
+        checkVerticalAndHorizontalLines();
+        if (gameFinished) {
+            return;
+        }
+        isCellsAreFull();
+    }
+
+    private void checkDiagonalLines() {
         for (byte i = 0, j = 2; i < 3; i += 2, j -= 2) {
             if (cells[i][0] != ' ' && (cells[i][0] == cells[1][1] && cells[1][1] == cells[j][2])) {
                 gameFinished = true;
@@ -81,9 +93,9 @@ public final class SimpleTicTacToe {
                 break;
             }
         }
-        if (gameFinished) {
-            return;
-        }
+    }
+
+    private void checkVerticalAndHorizontalLines() {
         for (byte i = 0; i < 3; i++) {
             if (cells[i][0] != ' ' && ((cells[i][0] == cells[i][1] && cells[i][1] == cells[i][2]) ||
                     cells[0][i] != ' ' && (cells[0][i] == cells[1][i] && cells[1][i] == cells[2][i]))) {
@@ -91,10 +103,6 @@ public final class SimpleTicTacToe {
                 winner = ((cells[i][0] == cells[i][1] && cells[i][1] == cells[i][2])) ? cells[i][0] : cells[0][i];
             }
         }
-        if (gameFinished) {
-            return;
-        }
-        isCellsAreFull();
     }
 
     private void isCellsAreFull() {
