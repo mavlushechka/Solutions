@@ -1,4 +1,4 @@
-package com.mavlushechka.solutions.university._8;
+package com.mavlushechka.solutions.university._8._0;
 
 import java.util.LinkedList;
 
