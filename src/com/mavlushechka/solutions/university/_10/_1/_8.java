@@ -1,4 +1,4 @@
-package com.mavlushechka.solutions.university._10_1;
+package com.mavlushechka.solutions.university._10._1;
 
 import java.util.ArrayDeque;
 import java.util.Scanner;
