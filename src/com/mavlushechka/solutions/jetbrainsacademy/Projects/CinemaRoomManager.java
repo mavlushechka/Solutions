@@ -16,30 +16,7 @@ public final class CinemaRoomManager {
 
     private final int income;
 
-    public static void main(String[] args) {
-        CinemaRoomManager cinemaRoomManager;
-        Scanner scanner = new Scanner(System.in);
-
-        System.out.println("Enter the number of rows:");
-        byte rows = scanner.nextByte();
-        System.out.println("Enter the number of seats in each row:");
-        byte seatsInEachRow = scanner.nextByte();
-        cinemaRoomManager = new CinemaRoomManager(rows, seatsInEachRow);
-
-        System.out.println("\nCinema:");
-        cinemaRoomManager.showRoom();
-        System.out.println();
-
-        System.out.println("Enter a row number:");
-        byte row = scanner.nextByte();
-        System.out.println("Enter a seat number in that row:");
-        byte seat = scanner.nextByte();
-        System.out.printf("\nTicket price: %s\n", cinemaRoomManager.getPlacePrice(row));
-        cinemaRoomManager.choosePlace(row, seat);
-
-        System.out.println("\nCinema:");
-        cinemaRoomManager.showRoom();
-    }
+    private final int INCOME;
 
     public CinemaRoomManager(byte rows, byte seatsInEachRow) {
         this.rows = rows;
@@ -95,4 +72,41 @@ abstract class Ticket {
     public static byte PRICE_FOR_FRONT_SEATS = 10;
 
     public static byte PRICE_FOR_BACK_SEATS = 8;
+}
+
+class Cinema {
+
+    public static void main(String[] args) {
+        CinemaRoomManager cinemaRoomManager;
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("Enter the number of rows:");
+        byte rows = scanner.nextByte();
+        System.out.println("Enter the number of seats in each row:");
+        byte seatsInEachRow = scanner.nextByte();
+        cinemaRoomManager = new CinemaRoomManager(rows, seatsInEachRow);
+
+        while (true) {
+            System.out.println("""
+                
+                1. Show the seats
+                2. Buy a ticket
+                0. Exit""");
+            byte choice = scanner.nextByte();
+
+            if (choice == 0) {
+                break;
+            } else if (choice == 1) {
+                System.out.println("\nCinema:");
+                cinemaRoomManager.showRoom();
+            } else if (choice == 2) {
+                System.out.println("\nEnter a row number:");
+                byte row = scanner.nextByte();
+                System.out.println("Enter a seat number in that row:");
+                byte seat = scanner.nextByte();
+                System.out.printf("Ticket price: %s\n", cinemaRoomManager.getPlacePrice(row));
+                cinemaRoomManager.choosePlace(row, seat);
+            }
+        }
+    }
 }
