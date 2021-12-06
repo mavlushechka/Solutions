@@ -6,42 +6,40 @@ public final class CinemaRoomManager {
 
     public final byte MAX_SEATS_IN_SMALL_ROOM = 60;
 
-    private final char[][] seats;
+    private final char[][] SEATS;
 
-    private final byte rows;
+    private final byte ROWS;
 
-    private final byte seatsInEachRow;
+    private final byte SEATS_IN_EACH_ROW;
 
-    private final boolean largeRoom;
-
-    private final int income;
+    private final boolean LARGE_ROOM;
 
     private final int INCOME;
 
     public CinemaRoomManager(byte rows, byte seatsInEachRow) {
-        this.rows = rows;
-        this.seatsInEachRow = seatsInEachRow;
-        seats = new char[rows][seatsInEachRow];
+        this.ROWS = rows;
+        this.SEATS_IN_EACH_ROW = seatsInEachRow;
+        SEATS = new char[rows][seatsInEachRow];
         for (byte i = 0; i < rows; i++) {
             for (byte j = 0; j < seatsInEachRow; j++) {
-                seats[i][j] = 'S';
+                SEATS[i][j] = 'S';
             }
         }
-        largeRoom = rows * seatsInEachRow > MAX_SEATS_IN_SMALL_ROOM;
-        income = (int) ((!largeRoom) ? Ticket.PRICE_DEFAULT * rows * seatsInEachRow :
+        LARGE_ROOM = rows * seatsInEachRow > MAX_SEATS_IN_SMALL_ROOM;
+        INCOME = (int) ((!LARGE_ROOM) ? Ticket.PRICE_DEFAULT * rows * seatsInEachRow :
                 seatsInEachRow * ((Ticket.PRICE_FOR_FRONT_SEATS * Math.floor(rows / 2.0))
                         + (Ticket.PRICE_FOR_BACK_SEATS * Math.ceil(rows / 2.0))));
     }
 
     public void showRoom() {
-        for (int i = 0; i <= seatsInEachRow; i++) {
+        for (int i = 0; i <= SEATS_IN_EACH_ROW; i++) {
             System.out.printf((i != 0) ? ("%d ") : ("  "), i);
         }
         System.out.println();
-        for (int i = 0; i < rows; i++) {
+        for (int i = 0; i < ROWS; i++) {
             System.out.print(i+1);
-            for (int j = 0; j < seatsInEachRow; j++) {
-                System.out.printf(" %c", seats[i][j]);
+            for (int j = 0; j < SEATS_IN_EACH_ROW; j++) {
+                System.out.printf(" %c", SEATS[i][j]);
             }
             System.out.println();
         }
@@ -49,17 +47,17 @@ public final class CinemaRoomManager {
 
     public String getPlacePrice(byte row) {
         return String.valueOf(Ticket.PRICE_CURRENCY) +
-                ((largeRoom) ? (row > Math.floor(rows / 2.0) ? Ticket.PRICE_FOR_BACK_SEATS
+                ((LARGE_ROOM) ? (row > Math.floor(ROWS / 2.0) ? Ticket.PRICE_FOR_BACK_SEATS
                         : Ticket.PRICE_FOR_FRONT_SEATS)
                         : Ticket.PRICE_DEFAULT);
     }
 
     public void choosePlace(byte row, byte seat) {
-        seats[row-1][seat-1] = 'B';
+        SEATS[row-1][seat-1] = 'B';
     }
 
     public String getIncome() {
-        return Ticket.PRICE_CURRENCY + Integer.toString(income);
+        return Ticket.PRICE_CURRENCY + Integer.toString(INCOME);
     }
 }
 
