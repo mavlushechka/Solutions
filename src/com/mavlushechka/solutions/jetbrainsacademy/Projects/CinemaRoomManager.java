@@ -63,13 +63,13 @@ public final class CinemaRoomManager {
 
 abstract class Ticket {
 
-    public static char PRICE_CURRENCY = '$';
+    public static final char PRICE_CURRENCY = '$';
 
-    public static byte PRICE_DEFAULT = 10;
+    public static final byte PRICE_DEFAULT = 10;
 
-    public static byte PRICE_FOR_FRONT_SEATS = 10;
+    public static final byte PRICE_FOR_FRONT_SEATS = 10;
 
-    public static byte PRICE_FOR_BACK_SEATS = 8;
+    public static final byte PRICE_FOR_BACK_SEATS = 8;
 }
 
 class Cinema {
