@@ -4,6 +4,8 @@ import java.util.Scanner;
 
 public final class CinemaRoomManager {
 
+    public final byte MAX_SEATS_IN_SMALL_ROOM = 60;
+
     private final char[][] seats;
 
     private final byte rows;
@@ -13,8 +15,6 @@ public final class CinemaRoomManager {
     private final boolean largeRoom;
 
     private final int income;
-
-    private final byte MAX_SEATS_IN_SMALL_ROOM = 60;
 
     public static void main(String[] args) {
         CinemaRoomManager cinemaRoomManager;
