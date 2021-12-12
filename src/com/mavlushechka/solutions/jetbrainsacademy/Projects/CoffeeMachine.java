@@ -4,15 +4,10 @@ import java.util.Objects;
 import java.util.Scanner;
 
 public class CoffeeMachine {
-
     private int waterMilliliters = 400;
-
     private int milkMilliliters = 540;
-
     private int coffeeBeansGram = 120;
-
     private int disposableCupsNumber = 9;
-
     private int moneyAmount = 550;
 
     public void start() {
@@ -106,11 +101,8 @@ enum CoffeeType {
     CAPPUCCINO(200, 100, 12, 6);
 
     public final int WATER_MILLILITERS;
-
     public final int MILK_MILLILITERS;
-
     public final int COFFEE_BEANS_GRAM;
-
     public final int COST;
 
     CoffeeType(int waterMilliliters, int milkMilliliters, int coffeeBeansGram, int cost) {
