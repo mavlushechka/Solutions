@@ -1,4 +1,4 @@
-package com.mavlushechka.solutions.university._1_1;
+package com.mavlushechka.solutions.university._1._1;
 
 import java.util.Scanner;
 

@@ -1,4 +1,4 @@
-package com.mavlushechka.solutions.university._1;
+package com.mavlushechka.solutions.university._1._0;
 
 class Student {
     private final int id;

@@ -1,4 +1,4 @@
-package com.mavlushechka.solutions.university._3;
+package com.mavlushechka.solutions.university._3._1;
 
 import java.util.Arrays;
 
@@ -6,14 +6,14 @@ public class _8 {
 
     public static void sort(int[] array) {
         for (int i = 0; i < array.length; i++) {
-            int maxNumberIndex = i;
+            int minNumberIndex = i;
 
             for (int j = i; j < array.length; j++) {
-                if (array[maxNumberIndex] < array[j]) {
-                    maxNumberIndex = j;
+                if (array[minNumberIndex] > array[j]) {
+                    minNumberIndex = j;
                 }
             }
-            swap(array, i, maxNumberIndex);
+            swap(array, i, minNumberIndex);
         }
     }
 
