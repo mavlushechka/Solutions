@@ -3,7 +3,7 @@ package com.mavlushechka.solutions.jetbrainsacademy.Projects;
 import java.util.Scanner;
 
 public class BullsAndCows {
-    private final String secretCode = "9305";
+    private String secretCode;
     private int bulls = 0;
     private int cows = 0;
 
@@ -12,8 +12,33 @@ public class BullsAndCows {
     }
 
     public void play() {
-        check(new Scanner(System.in).next());
-        System.out.println(getGrade());
+        generateRandomSecretCode(new Scanner(System.in).nextInt());
+        System.out.println(getSecretCode());
+    }
+
+    private void generateRandomSecretCode(int length) {
+        if (length > 10) {
+            return;
+        }
+
+        String pseudoRandomNumber = String.valueOf(System.nanoTime());
+        StringBuilder newSecretNumber = new StringBuilder();
+
+        for (int i = 0; i < pseudoRandomNumber.length(); i++) {
+            char digit = pseudoRandomNumber.charAt(i);
+
+            if (!newSecretNumber.toString().contains(String.valueOf(digit))) {
+                newSecretNumber.append(digit);
+            }
+            if (newSecretNumber.length() == length) {
+                secretCode = newSecretNumber.toString();
+                break;
+            }
+        }
+
+        if (newSecretNumber.length() != length) {
+            generateRandomSecretCode(length);
+        }
     }
 
     private void check(String enteredSecretCode) {
@@ -25,6 +50,14 @@ public class BullsAndCows {
                 bulls++;
                 cows--;
             }
+        }
+    }
+
+    private String getSecretCode() {
+        if (secretCode != null) {
+            return String.format("The random secret number is %s.", secretCode);
+        } else {
+            return "Error: can't generate a secret number with a length of 11 because there aren't enough unique digits.";
         }
     }
 
