@@ -12,12 +12,27 @@ public class BullsAndCows {
     }
 
     public void play() {
-        generateRandomSecretCode(new Scanner(System.in).nextInt());
-        System.out.println(getSecretCode());
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("Please, enter the secret code's length:");
+        generateRandomSecretCode(scanner.nextInt());
+        if (secretCode != null) {
+            System.out.println("Okay, let's start a game!");
+            for (int i = 1; true; i++) {
+                System.out.printf("Turn %d:\n", i);
+                check(scanner.next());
+                System.out.println(getGrade());
+                if (bulls == secretCode.length()) {
+                    System.out.println("Congratulations! You guessed the secret code.");
+                    return;
+                }
+            }
+        }
     }
 
     private void generateRandomSecretCode(int length) {
         if (length > 10) {
+            System.out.println("Error: can't generate a secret number with a length of 11 because there aren't enough unique digits.");
             return;
         }
 
@@ -42,6 +57,9 @@ public class BullsAndCows {
     }
 
     private void check(String enteredSecretCode) {
+        bulls = 0;
+        cows = 0;
+
         for (int i = 0; i < enteredSecretCode.length(); i++) {
             if (secretCode.contains(String.valueOf(enteredSecretCode.charAt(i)))) {
                 cows++;
@@ -54,26 +72,31 @@ public class BullsAndCows {
     }
 
     private String getSecretCode() {
-        if (secretCode != null) {
-            return String.format("The random secret number is %s.", secretCode);
-        } else {
-            return "Error: can't generate a secret number with a length of 11 because there aren't enough unique digits.";
-        }
+        return String.format("The random secret number is %s.", secretCode);
     }
 
     private String getGrade() {
         StringBuilder grade = new StringBuilder("Grade: ");
 
-        if (bulls > 0 && cows > 0) {
-            grade.append(String.format("%d bull(s) and %d cow(s).", bulls, cows));
-        } else if (bulls > 0) {
-            grade.append(String.format("%d bull(s).", bulls));
-        } else if (cows > 0) {
-            grade.append(String.format("%d cow(s).", cows));
+        if (bulls > 1 && cows > 1) {
+            grade.append(String.format("%d bulls and %d cows.", bulls, cows));
+        } else if (bulls > 0 && cows > 0) {
+            grade.append(String.format("%d bull and %d cow.", bulls, cows));
+        } else if (bulls == 0 && cows == 0) {
+            grade.append("None");
         } else {
-            grade.append("None.");
+            if (bulls > 1) {
+                grade.append(String.format("%d bulls.", bulls));
+            } else if (bulls > 0) {
+                grade.append(String.format("%d bull.", bulls));
+            }
+
+            if (cows > 1) {
+                grade.append(String.format("%d cows.", cows));
+            }  else if (cows > 0) {
+                grade.append(String.format("%d cow.", cows));
+            }
         }
-        grade.append(String.format(" The secret code is %s.", secretCode));
 
         return grade.toString();
     }
