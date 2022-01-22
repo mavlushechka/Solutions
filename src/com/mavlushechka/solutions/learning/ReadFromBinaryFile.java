@@ -9,6 +9,7 @@ public class ReadFromBinaryFile {
         DataInputStream dataInputStream = new DataInputStream(new FileInputStream("src/com/mavlushechka/solutions/learning/BinaryFile.txt"));
 
         System.out.println(dataInputStream.readInt());
+        System.out.println(dataInputStream.readInt());
         System.out.println(dataInputStream.readBoolean());
 
         dataInputStream.close();

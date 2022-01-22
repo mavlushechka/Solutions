@@ -9,6 +9,7 @@ public class WriteToBinaryFile {
         DataOutputStream dataOutputStream = new DataOutputStream(new FileOutputStream("src/com/mavlushechka/solutions/learning/BinaryFile.txt"));
 
         dataOutputStream.writeInt(18);
+        dataOutputStream.writeInt(19);
         dataOutputStream.writeBoolean(true);
 
         dataOutputStream.close();
