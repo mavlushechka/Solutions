@@ -12,6 +12,7 @@ public class RandomAccessFileDemo {
             randomAccessFile.writeDouble(number);
         }
 
+        // Since each double value is 8 bytes long, each value starts on an 8-byte boundary.
         // seek to first double
         randomAccessFile.seek(0);
         System.out.println(randomAccessFile.readDouble());
