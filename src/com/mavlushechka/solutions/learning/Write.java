@@ -1,6 +1,6 @@
 package com.mavlushechka.solutions.learning;
 
-public class WriteDemo {
+public class Write {
     public static void main(String[] args) {
         int b = 'X';
 

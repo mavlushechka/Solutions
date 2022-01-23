@@ -1,10 +1,8 @@
 package com.mavlushechka.solutions.learning;
 
-import java.io.PrintWriter;
-
-public class PrintWriterDemo {
+public class PrintWriter {
     public static void main(String[] args) {
-        PrintWriter printWriter = new PrintWriter(System.out, true);
+        java.io.PrintWriter printWriter = new java.io.PrintWriter(System.out, true);
         int number = 18;
         double floatingNumber = 18.18;
 

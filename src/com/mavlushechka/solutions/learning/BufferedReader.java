@@ -1,12 +1,11 @@
 package com.mavlushechka.solutions.learning;
 
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-public class BufferedReaderExample {
+public class BufferedReader {
     public static void main(String[] args) throws IOException {
-        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+        java.io.BufferedReader bufferedReader = new java.io.BufferedReader(new InputStreamReader(System.in));
 
         for (char character = (char) bufferedReader.read(); character != '.'; character = (char) bufferedReader.read()) {
             System.out.print(character);

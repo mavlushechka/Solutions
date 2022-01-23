@@ -1,6 +1,6 @@
 package com.mavlushechka.solutions.learning;
 
-public class SystemErrDemo {
+public class SystemErr {
     public static void main(String[] args) {
         System.err.println("Error message...");
     }

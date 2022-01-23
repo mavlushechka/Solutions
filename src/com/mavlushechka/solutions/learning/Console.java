@@ -1,10 +1,8 @@
 package com.mavlushechka.solutions.learning;
 
-import java.io.Console;
-
-public class ConsoleClassExample {
+public class Console {
     public static void main(String[] args) {
-        Console console = System.console();
+        java.io.Console console = System.console();
         String password;
 
         System.out.print("Enter password: ");

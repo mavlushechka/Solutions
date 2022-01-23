@@ -1,8 +1,8 @@
 package com.mavlushechka.solutions.learning;
 
-public class AbstractDemo {
+public class Abstract {
 	public static void main(String[] args) {
-		HelloWorldDemo helloWorld = new HelloWorldDemo();
+		HelloWorldNonAbstract helloWorld = new HelloWorldNonAbstract();
 		System.out.println(helloWorld.getText());
 		helloWorld.showClassInfo();
 	}
@@ -18,7 +18,7 @@ abstract class HelloWorldAbstract {
 	public abstract void showClassInfo();
 }
 
-class HelloWorldDemo extends HelloWorldAbstract {
+class HelloWorldNonAbstract extends HelloWorldAbstract {
 	public void showClassInfo() {
 		System.out.println("Class: HelloWorldDemo");
 	}

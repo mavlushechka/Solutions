@@ -1,6 +1,6 @@
 package com.mavlushechka.solutions.learning;
 
-public class UnicodeDemo {
+public class Unicode {
     public static void main(String[] args) {
         char unicode = '\u2211';
 

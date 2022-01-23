@@ -1,12 +1,11 @@
 package com.mavlushechka.solutions.learning;
 
 import java.io.IOException;
-import java.io.RandomAccessFile;
 
-public class RandomAccessFileDemo {
+public class RandomAccessFile {
     public static void main(String[] args) throws IOException {
         double[] numbers = { 1.1, 2.2, 3.3, 4.4 };
-        RandomAccessFile randomAccessFile = new RandomAccessFile("src/com/mavlushechka/solutions/learning/Random.dat", "rw");
+        java.io.RandomAccessFile randomAccessFile = new java.io.RandomAccessFile("src/com/mavlushechka/solutions/learning/Random.dat", "rw");
 
         for (double number : numbers) {
             randomAccessFile.writeDouble(number);
