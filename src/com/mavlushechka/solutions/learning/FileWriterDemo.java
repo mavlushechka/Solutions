@@ -11,7 +11,7 @@ public class FileWriterDemo {
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
 
         for (String text = bufferedReader.readLine(); !text.equalsIgnoreCase("stop"); text = bufferedReader.readLine()) {
-            fileWriter.write(text);
+            fileWriter.write(text + System.lineSeparator());
         }
 
         fileWriter.close();
