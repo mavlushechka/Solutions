@@ -4,7 +4,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-public class CopyFileTextAndReplaceSpacesToHyphens {
+public class CopyFileTextAndReplaceSpacesToHyphensUsingByteStreams {
     public static void main(String[] args) throws IOException {
         FileInputStream fileInputStream = new FileInputStream("src/com/mavlushechka/solutions/javaabeginnersguide/_10_7/File.txt");
         FileOutputStream fileOutputStream = new FileOutputStream("src/com/mavlushechka/solutions/javaabeginnersguide/_10_7/File (copy).txt");
