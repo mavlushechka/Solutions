@@ -2,7 +2,7 @@ package com.mavlushechka.solutions.learning;
 
 import java.io.IOException;
 
-public class ReadBytes {
+public class SystemInRead {
     public static void main(String[] args) throws IOException {
         byte[] array = new byte[10];
 

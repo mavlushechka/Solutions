@@ -1,12 +1,11 @@
 package com.mavlushechka.solutions.learning;
 
-import java.io.DataInputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
 
-public class ReadFromBinaryFile {
+public class DataInputStream {
     public static void main(String[] args) throws IOException {
-        DataInputStream dataInputStream = new DataInputStream(new FileInputStream("src/com/mavlushechka/solutions/learning/BinaryFile.txt"));
+        java.io.DataInputStream dataInputStream = new java.io.DataInputStream(new FileInputStream("src/com/mavlushechka/solutions/learning/BinaryFile.txt"));
 
         System.out.println(dataInputStream.readInt());
         System.out.println(dataInputStream.readInt());

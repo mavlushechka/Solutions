@@ -1,6 +1,6 @@
 package com.mavlushechka.solutions.learning;
 
-public class Write {
+public class SystemOutWrite {
     public static void main(String[] args) {
         int b = 'X';
 
