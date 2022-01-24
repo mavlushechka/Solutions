@@ -24,11 +24,11 @@ class Message {
 		}
 		
 		System.out.println(text);
-		notify();
 	}
 	
 	synchronized public void setText(String text) {
 		this.text = text;
+		notify();
 	}
 }
 
