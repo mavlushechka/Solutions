@@ -53,7 +53,13 @@ class ThreadTickTock implements Runnable {
     }
 
     public void run() {
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < 5; i++) {
+            try {
+                Thread.sleep(500);
+            } catch (InterruptedException interruptedException) {
+                interruptedException.printStackTrace();
+            }
+
             if ("Tick".equalsIgnoreCase(type)) {
                 tickTock.tick();
             } else if ("Tock".equalsIgnoreCase(type)) {
