@@ -1,4 +1,4 @@
-package com.mavlushechka.solutions.javaabeginnersguide._12_3;
+package com.mavlushechka.solutions.javaabeginnersguide._12._3;
 
 public enum Tools {
     SCREWDRIVER, WRENCH, HAMMER, PLIERS

@@ -1,4 +1,4 @@
-package com.mavlushechka.solutions.javaabeginnersguide._5_3;
+package com.mavlushechka.solutions.javaabeginnersguide._5._3;
 
 public class ShowBits {
     private final int numberOfBits;

@@ -1,4 +1,4 @@
-package com.mavlushechka.solutions.javaabeginnersguide._10_8;
+package com.mavlushechka.solutions.javaabeginnersguide._10._8;
 
 import java.io.FileReader;
 import java.io.FileWriter;

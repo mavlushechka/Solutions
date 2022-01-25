@@ -1,4 +1,4 @@
-package com.mavlushechka.solutions.javaabeginnersguide._10_7;
+package com.mavlushechka.solutions.javaabeginnersguide._10._7;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
