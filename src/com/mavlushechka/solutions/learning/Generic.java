@@ -22,13 +22,30 @@ public class Generic<T extends Number> {
 }
 
 class NumberExamples {
+    static <T extends Comparable<T>, V extends T> boolean arraysEqual(T[] firstArray, V[] secondArray) {
+        if (firstArray.length != secondArray.length) {
+            return false;
+        }
+
+        for (int i = 0; i < firstArray.length; i++) {
+            if (firstArray[i] != secondArray[i]) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
     public static void main(String[] args) {
         Generic<Integer> integerGeneric = new Generic<>(1);
         Generic<Double> doubleGeneric = new Generic<>(2.0);
+        Integer[] numbers1 = { 1, 2, 3, 4, 5 };
+        Integer[] numbers2 = { 1, 2, 3, 4, 5 };
 
         System.out.println(integerGeneric);
         System.out.println(doubleGeneric);
 
         System.out.println(doubleGeneric.compareTo(integerGeneric));
+        System.out.println(arraysEqual(numbers1, numbers2));
     }
 }
