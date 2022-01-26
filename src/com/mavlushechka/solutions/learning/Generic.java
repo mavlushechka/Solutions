@@ -37,7 +37,7 @@ class Summation {
 }
 
 class NumberExamples {
-    static <T extends Comparable<T>, V extends T> boolean arraysEqual(T[] firstArray, V[] secondArray) {
+    public static <T extends Comparable<T>, V extends T> boolean arraysEqual(T[] firstArray, V[] secondArray) {
         if (firstArray.length != secondArray.length) {
             return false;
         }
