@@ -21,6 +21,21 @@ public class Generic<T extends Number> {
     }
 }
 
+class Summation {
+    private int sum;
+
+    public <T extends Number> Summation(T[] numbers) {
+        for (T number : numbers) {
+            sum += number.doubleValue();
+        }
+    }
+
+    @Override
+    public String toString() {
+        return String.valueOf(sum);
+    }
+}
+
 class NumberExamples {
     static <T extends Comparable<T>, V extends T> boolean arraysEqual(T[] firstArray, V[] secondArray) {
         if (firstArray.length != secondArray.length) {
@@ -39,13 +54,17 @@ class NumberExamples {
     public static void main(String[] args) {
         Generic<Integer> integerGeneric = new Generic<>(1);
         Generic<Double> doubleGeneric = new Generic<>(2.0);
+
         Integer[] numbers1 = { 1, 2, 3, 4, 5 };
         Integer[] numbers2 = { 1, 2, 3, 4, 5 };
+        Summation summation = new Summation(numbers1);
 
         System.out.println(integerGeneric);
         System.out.println(doubleGeneric);
-
         System.out.println(doubleGeneric.compareTo(integerGeneric));
+
         System.out.println(arraysEqual(numbers1, numbers2));
+
+        System.out.println(summation);
     }
 }
