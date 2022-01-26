@@ -1,6 +1,14 @@
 package com.mavlushechka.solutions.learning;
 
-public class Generic<T extends Number> {
+interface IGeneric<T extends Number> {
+    int compareTo(Generic<?> otherGeneric);
+}
+
+interface ISummation<T extends Number> {
+    // members
+}
+
+public class Generic<T extends Number> implements IGeneric<T> {
     private final T number;
 
     public Generic(T number) {
@@ -21,7 +29,7 @@ public class Generic<T extends Number> {
     }
 }
 
-class Summation {
+class Summation implements ISummation<Integer> {
     private int sum;
 
     public <T extends Number> Summation(T[] numbers) {
