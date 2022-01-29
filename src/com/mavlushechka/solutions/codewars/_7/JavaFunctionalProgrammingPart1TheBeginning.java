@@ -3,7 +3,7 @@ package com.mavlushechka.solutions.codewars._7;
 import java.util.function.Function;
 
 public class JavaFunctionalProgrammingPart1TheBeginning {
-    public static Function<Student, Boolean> f = (Student student) -> student.getFullName().equals("John Smith");
+    public static Function<Student, Boolean> f = (Student student) -> student.getFullName().equals("John Smith") && student.studentNumber.equals("js123");
 }
 
 class Student {
