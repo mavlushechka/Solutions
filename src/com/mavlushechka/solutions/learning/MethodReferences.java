@@ -4,6 +4,10 @@ interface IntPredicate {
     boolean test(int n);
 }
 
+interface SomeGenericTest<T> {
+    boolean test(T a, T b);
+}
+
 class MyIntPredicates {
     public final int x;
 
@@ -29,9 +33,14 @@ public class MethodReferences {
         return intPredicate.test(number);
     }
 
+    public static <T> boolean myGenericTest(T a, T b) {
+        return true;
+    }
+
     public static void main(String[] args) {
         MyIntPredicates myIntPredicates = new MyIntPredicates(10);
         IntPredicate intPredicate = myIntPredicates::isXEqualsTo;
+        SomeGenericTest<Integer> someGenericTest = MethodReferences::myGenericTest;
         int number = 10;
 
         if (numberTest(MyIntPredicates::isEven, number)) {
