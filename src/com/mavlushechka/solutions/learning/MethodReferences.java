@@ -31,6 +31,7 @@ public class MethodReferences {
 
     public static void main(String[] args) {
         MyIntPredicates myIntPredicates = new MyIntPredicates(10);
+        IntPredicate intPredicate = myIntPredicates::isXEqualsTo;
         int number = 10;
 
         if (numberTest(MyIntPredicates::isEven, number)) {
@@ -45,7 +46,7 @@ public class MethodReferences {
             System.out.printf("%d is negative.\n", number);
         }
 
-        if (numberTest(myIntPredicates::isXEqualsTo, number)) {
+        if (numberTest(intPredicate, number)) {
             System.out.printf("%d equals to %d.\n", myIntPredicates.x, number);
         } else {
             System.out.printf("%d not equals to %d.\n", myIntPredicates.x, number);
