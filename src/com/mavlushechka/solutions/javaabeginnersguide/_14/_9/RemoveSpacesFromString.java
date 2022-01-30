@@ -10,7 +10,7 @@ public class RemoveSpacesFromString {
     }
 
     public static void main(String[] args) {
-        StringFunction removeSpaces = string -> string.replaceAll(" ", "");
+        StringFunction removeSpaces = string -> string.replace(" ", "");
         String string = "Remove spaces from string.";
 
         System.out.printf("Text before removing spaces:\t%s\n", string);
