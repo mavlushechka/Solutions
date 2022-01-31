@@ -1,5 +1,7 @@
 package com.mavlushechka.solutions.jetbrainsacademy.Projects;
 
+import java.security.InvalidParameterException;
+import java.util.Random;
 import java.util.Scanner;
 
 public class BullsAndCows {
@@ -13,10 +15,12 @@ public class BullsAndCows {
 
     public void play() {
         Scanner scanner = new Scanner(System.in);
+        int length;
 
         System.out.println("Please, enter the secret code's length:");
-        generateRandomSecretCode(scanner.nextInt());
-        if (secretCode != null) {
+        length = scanner.nextInt();
+        try {
+            generateRandomSecretCode(length);
             System.out.println("Okay, let's start a game!");
             for (int i = 1; true; i++) {
                 System.out.printf("Turn %d:\n", i);
@@ -27,32 +31,26 @@ public class BullsAndCows {
                     return;
                 }
             }
+        } catch (InvalidParameterException invalidParameterException) {
+            System.out.printf("Error: can't generate a secret number with a length of %d because there aren't enough unique digits.\n", length);
         }
     }
 
     private void generateRandomSecretCode(int length) {
         if (length > 10) {
-            System.out.println("Error: can't generate a secret number with a length of 11 because there aren't enough unique digits.");
-            return;
-        }
+            throw new InvalidParameterException();
+        } else {
+            StringBuilder stringBuilder = new StringBuilder();
+            Random random = new Random();
 
-        String pseudoRandomNumber = String.valueOf(System.nanoTime());
-        StringBuilder newSecretNumber = new StringBuilder();
+            while (stringBuilder.length() < length) {
+                int randomNumber = random.nextInt(10);
 
-        for (int i = 0; i < pseudoRandomNumber.length(); i++) {
-            char digit = pseudoRandomNumber.charAt(i);
-
-            if (!newSecretNumber.toString().contains(String.valueOf(digit))) {
-                newSecretNumber.append(digit);
+                if (!stringBuilder.toString().contains(String.valueOf(randomNumber))) {
+                    stringBuilder.append(randomNumber);
+                }
             }
-            if (newSecretNumber.length() == length) {
-                secretCode = newSecretNumber.toString();
-                break;
-            }
-        }
-
-        if (newSecretNumber.length() != length) {
-            generateRandomSecretCode(length);
+            secretCode = stringBuilder.toString();
         }
     }
 
@@ -90,7 +88,6 @@ public class BullsAndCows {
             } else if (bulls > 0) {
                 grade.append(String.format("%d bull.", bulls));
             }
-
             if (cows > 1) {
                 grade.append(String.format("%d cows.", cows));
             }  else if (cows > 0) {
