@@ -15,12 +15,16 @@ public class BullsAndCows {
 
     public void play() {
         Scanner scanner = new Scanner(System.in);
-        int length;
+        int lengthOfSecretCode;
+        int numberOfPossibleSymbols;
 
-        System.out.println("Please, enter the secret code's length:");
-        length = scanner.nextInt();
+        System.out.println("Input the length of the secret code:");
+        lengthOfSecretCode = scanner.nextInt();
+        System.out.println("Input the number of possible symbols in the code:");
+        numberOfPossibleSymbols = scanner.nextInt();
         try {
-            generateRandomSecretCode(length);
+            generateRandomSecretCode(lengthOfSecretCode, numberOfPossibleSymbols);
+            System.out.println(getSecretCode(numberOfPossibleSymbols));
             System.out.println("Okay, let's start a game!");
             for (int i = 1; true; i++) {
                 System.out.printf("Turn %d:\n", i);
@@ -32,25 +36,34 @@ public class BullsAndCows {
                 }
             }
         } catch (InvalidParameterException invalidParameterException) {
-            System.out.printf("Error: can't generate a secret number with a length of %d because there aren't enough unique digits.\n", length);
+            System.out.printf("Error: can't generate a secret number with a length of %d because there aren't enough unique digits.\n", lengthOfSecretCode);
         }
     }
 
-    private void generateRandomSecretCode(int length) {
-        if (length > 10) {
+    private void generateRandomSecretCode(int lengthOfSecretCode, int numberOfPossibleSymbols) {
+        if (lengthOfSecretCode > 36) {
             throw new InvalidParameterException();
         } else {
-            StringBuilder stringBuilder = new StringBuilder();
+            StringBuilder randomSecretCode = new StringBuilder();
             Random random = new Random();
+            numberOfPossibleSymbols = numberOfPossibleSymbols > 10 ? numberOfPossibleSymbols - 10 : numberOfPossibleSymbols;
 
-            while (stringBuilder.length() < length) {
-                int randomNumber = random.nextInt(10);
+            while (randomSecretCode.length() < lengthOfSecretCode) {
+                if (lengthOfSecretCode == 1 || randomSecretCode.length() < 10 && randomSecretCode.length() < lengthOfSecretCode - 1) {
+                    int randomNumber = random.nextInt(10);
 
-                if (!stringBuilder.toString().contains(String.valueOf(randomNumber))) {
-                    stringBuilder.append(randomNumber);
+                    if (!randomSecretCode.toString().contains(String.valueOf(randomNumber))) {
+                        randomSecretCode.append(randomNumber);
+                    }
+                } else {
+                    char randomLetter = (char) (random.nextInt(numberOfPossibleSymbols) + 97);
+
+                    if (!randomSecretCode.toString().contains(String.valueOf(randomLetter))) {
+                        randomSecretCode.append(randomLetter);
+                    }
                 }
             }
-            secretCode = stringBuilder.toString();
+            secretCode = randomSecretCode.toString();
         }
     }
 
@@ -69,8 +82,16 @@ public class BullsAndCows {
         }
     }
 
-    private String getSecretCode() {
-        return String.format("The random secret number is %s.", secretCode);
+    private String getSecretCode(int numberOfPossibleSymbols) {
+        StringBuilder stars = new StringBuilder();
+
+        stars.append("*".repeat(secretCode.length()));
+        numberOfPossibleSymbols = numberOfPossibleSymbols > 10 ? numberOfPossibleSymbols - 10 : numberOfPossibleSymbols;
+        if (secretCode.length() != 1 && numberOfPossibleSymbols > 1) {
+            return String.format("The secret is prepared: %s (0-9, a-%c).", stars, 96 + numberOfPossibleSymbols);
+        } else {
+            return String.format("The secret is prepared: %s (0-9).", stars);
+        }
     }
 
     private String getGrade() {
