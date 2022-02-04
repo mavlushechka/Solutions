@@ -2,11 +2,10 @@ package com.mavlushechka.solutions.jetbrainsacademy.Projects;
 
 import java.security.InvalidParameterException;
 import java.util.Scanner;
+import java.util.concurrent.ThreadLocalRandom;
 
 class TicTacToeWithAI {
-    private final int HEIGHT_OF_TABLE = 3;
-    private final int WIDTH_OF_TABLE = 3;
-    private final char[][] CELLS = new char[HEIGHT_OF_TABLE][WIDTH_OF_TABLE];
+    private final char[][] CELLS = {{' ', ' ', ' '}, {' ', ' ', ' '}, {' ', ' ', ' '}};
     private final Scanner SCANNER = new Scanner(System.in);
     private int firstPlayerMoves;
     private int secondPlayerMoves;
@@ -14,24 +13,30 @@ class TicTacToeWithAI {
     private Player winner;
 
     public void play() {
-        enterCells();
         showTable();
-        makeMove();
-        showTable();
-        showWinner();
-    }
+        while (!gameFinished) {
+            System.out.print("Enter the coordinates: ");
+            try {
+                String yAndX = SCANNER.nextLine();
+                String y = yAndX.split(" ")[0];
+                String x = yAndX.split(" ")[1];
 
-    private void enterCells() {
-        String cells;
-
-        System.out.print("Enter the cells: ");
-        cells = SCANNER.next();
-        for (int i = 0; i < HEIGHT_OF_TABLE; i++) {
-            for (int j = 0; j < WIDTH_OF_TABLE; j++) {
-                CELLS[i][j] = cells.charAt(i * HEIGHT_OF_TABLE + j);
-                increasePlayerMoves(CELLS[i][j]);
+                makeMove(y, x);
+                showTable();
+                if (!gameFinished) {
+                    System.out.println("Making move level \"easy\"");
+                    computerMakeMove();
+                    showTable();
+                }
+            } catch (NumberFormatException numberFormatException) {
+                System.out.println("You should enter numbers!");
+            } catch (ArrayIndexOutOfBoundsException arrayIndexOutOfBoundsException) {
+                System.out.println("Coordinates should be from 1 to 3!");
+            } catch (InvalidParameterException invalidParameterException) {
+                System.out.println("This cell is occupied! Choose another one!");
             }
         }
+        showWinner();
     }
 
     private void increasePlayerMoves(char player) {
@@ -54,32 +59,32 @@ class TicTacToeWithAI {
         System.out.println("---------");
     }
 
-    private void makeMove() {
-        int y;
-        int x;
+    private void makeMove(String y, String x) throws NumberFormatException, ArrayIndexOutOfBoundsException, InvalidParameterException {
+        int tempY = Integer.parseInt(y) - 1;
+        int tempX = Integer.parseInt(x) - 1;
 
-        System.out.print("Enter the coordinates: ");
-        try {
-            y = Integer.parseInt(SCANNER.next()) - 1;
-            x = Integer.parseInt(SCANNER.next()) - 1;
-
-            if (CELLS[y][x] != '_') {
-                throw new InvalidParameterException();
-            }
-        } catch (NumberFormatException numberFormatException) {
-            System.out.println("You should enter numbers!");
-            makeMove();
-            return;
-        } catch (ArrayIndexOutOfBoundsException arrayIndexOutOfBoundsException) {
-            System.out.println("Coordinates should be from 1 to 3!");
-            makeMove();
-            return;
-        } catch (InvalidParameterException invalidParameterException) {
-            System.out.println("This cell is occupied! Choose another one!");
-            makeMove();
-            return;
+        if (CELLS[tempY][tempX] != ' ') {
+            throw new InvalidParameterException();
         }
+
+        setCell(tempY, tempX);
+    }
+
+    private void computerMakeMove() {
+        ThreadLocalRandom threadLocalRandom = ThreadLocalRandom.current();
+        String y = String.valueOf(threadLocalRandom.nextInt(1, 4));
+        String x = String.valueOf(threadLocalRandom.nextInt(1, 4));
+
+        try {
+            makeMove(y, x);
+        } catch (InvalidParameterException invalidParameterException) {
+            computerMakeMove();
+        }
+    }
+
+    private void setCell(int y, int x) {
         CELLS[y][x] = firstPlayerMoves == secondPlayerMoves ? Player.FIRST.SYMBOL : Player.SECOND.SYMBOL;
+        increasePlayerMoves(CELLS[y][x]);
         checkStatusOfGame();
     }
 
@@ -88,7 +93,7 @@ class TicTacToeWithAI {
         if (!gameFinished) {
             for (char[] oneLineCells : CELLS) {
                 for (char cell : oneLineCells) {
-                    if (cell != '_') {
+                    if (cell != ' ') {
                         gameFinished = true;
                     } else {
                         gameFinished = false;
@@ -100,15 +105,15 @@ class TicTacToeWithAI {
     }
 
     private boolean findWinnerInHorizontalLines() {
-        for (int i = 0; i < HEIGHT_OF_TABLE; i++) {
-            if (CELLS[i][0] != '_' && CELLS[i][0] == CELLS[i][1] && CELLS[i][1] == CELLS[i][2]) {
+        for (int i = 0; i < 3; i++) {
+            if (CELLS[i][0] != ' ' && CELLS[i][0] == CELLS[i][1] && CELLS[i][1] == CELLS[i][2]) {
                 winner = Player.FIRST.SYMBOL == CELLS[i][0] ? Player.FIRST : Player.SECOND;
                 return true;
             }
         }
-        for (int i = 0; i < WIDTH_OF_TABLE; i++) {
-            if (CELLS[i][0] != '_' && CELLS[0][i] == CELLS[1][i] && CELLS[1][i] == CELLS[2][i]) {
-                winner = Player.FIRST.SYMBOL == CELLS[i][0] ? Player.FIRST : Player.SECOND;
+        for (int i = 0; i < 3; i++) {
+            if (CELLS[0][i] != ' ' && CELLS[0][i] == CELLS[1][i] && CELLS[1][i] == CELLS[2][i]) {
+                winner = Player.FIRST.SYMBOL == CELLS[0][i] ? Player.FIRST : Player.SECOND;
                 return true;
             }
         }
@@ -116,10 +121,10 @@ class TicTacToeWithAI {
     }
 
     private boolean findWinnerInDiagonalLines() {
-        if (CELLS[0][0] != '_' && CELLS[0][0] == CELLS[1][1] && CELLS[1][1] == CELLS[2][2]) {
+        if (CELLS[0][0] != ' ' && CELLS[0][0] == CELLS[1][1] && CELLS[1][1] == CELLS[2][2]) {
             winner = Player.FIRST.SYMBOL == CELLS[0][0] ? Player.FIRST : Player.SECOND;
             return true;
-        } else if (CELLS[0][2] != '_' && CELLS[0][2] == CELLS[1][1] && CELLS[1][1] == CELLS[2][0]) {
+        } else if (CELLS[0][2] != ' ' && CELLS[0][2] == CELLS[1][1] && CELLS[1][1] == CELLS[2][0]) {
             winner = Player.FIRST.SYMBOL == CELLS[0][2] ? Player.FIRST : Player.SECOND;
             return true;
         }
