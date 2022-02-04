@@ -7,43 +7,68 @@ import java.util.concurrent.ThreadLocalRandom;
 class TicTacToeWithAI {
     private final char[][] CELLS = {{' ', ' ', ' '}, {' ', ' ', ' '}, {' ', ' ', ' '}};
     private final Scanner SCANNER = new Scanner(System.in);
-    private int firstPlayerMoves;
-    private int secondPlayerMoves;
+    private Player currentPlayer = Player.FIRST;
     private boolean gameFinished;
     private Player winner;
 
     public void play() {
-        showTable();
-        while (!gameFinished) {
-            System.out.print("Enter the coordinates: ");
-            try {
-                String yAndX = SCANNER.nextLine();
-                String y = yAndX.split(" ")[0];
-                String x = yAndX.split(" ")[1];
-
-                makeMove(y, x);
-                showTable();
-                if (!gameFinished) {
-                    System.out.println("Making move level \"easy\"");
-                    computerMakeMove();
-                    showTable();
-                }
-            } catch (NumberFormatException numberFormatException) {
-                System.out.println("You should enter numbers!");
-            } catch (ArrayIndexOutOfBoundsException arrayIndexOutOfBoundsException) {
-                System.out.println("Coordinates should be from 1 to 3!");
-            } catch (InvalidParameterException invalidParameterException) {
-                System.out.println("This cell is occupied! Choose another one!");
-            }
+        System.out.print("Input command: ");
+        try {
+            executeCommand(SCANNER.nextLine());
+        } catch (IllegalArgumentException illegalArgumentException) {
+            System.out.println("Command not found!");
+            play();
+            return;
+        } catch (ArrayIndexOutOfBoundsException arrayIndexOutOfBoundsException) {
+            System.out.println("Bad parameters!");
+            play();
+            return;
         }
-        showWinner();
+
+        if (!gameFinished) {
+            showTable();
+            while (!gameFinished) {
+                try {
+                    if (!currentPlayer.isComputer()) {
+                        System.out.print("Enter the coordinates: ");
+                        String yAndX = SCANNER.nextLine();
+                        String y = yAndX.split(" ")[0];
+                        String x = yAndX.split(" ")[1];
+
+                        makeMove(y, x);
+                    } else {
+                        System.out.println("Making move level \"easy\"");
+                        computerMakeMove();
+                    }
+                    showTable();
+                } catch (NumberFormatException numberFormatException) {
+                    System.out.println("You should enter numbers!");
+                } catch (ArrayIndexOutOfBoundsException arrayIndexOutOfBoundsException) {
+                    System.out.println("Coordinates should be from 1 to 3!");
+                } catch (InvalidParameterException invalidParameterException) {
+                    System.out.println("This cell is occupied! Choose another one!");
+                }
+            }
+            showWinner();
+        }
     }
 
-    private void increasePlayerMoves(char player) {
-        if (player == Player.FIRST.SYMBOL) {
-            firstPlayerMoves++;
-        } else if (player == Player.SECOND.SYMBOL) {
-            secondPlayerMoves++;
+    private void executeCommand(String command) throws IllegalArgumentException, ArrayIndexOutOfBoundsException {
+        String[] commandAndArguments = command.toUpperCase().split(" ");
+
+        if (Command.valueOf(commandAndArguments[0]) == Command.START) {
+            if ("USER".equals(commandAndArguments[1])) {
+                Player.FIRST.setComputer(false);
+            } else if (ComputerLevel.valueOf(commandAndArguments[1]) == ComputerLevel.EASY) {
+                Player.FIRST.setComputer(true);
+            }
+            if ("USER".equals(commandAndArguments[2])) {
+                Player.SECOND.setComputer(false);
+            } else if (ComputerLevel.valueOf(commandAndArguments[2]) == ComputerLevel.EASY) {
+                Player.SECOND.setComputer(true);
+            }
+        } else if (Command.valueOf(commandAndArguments[0]) == Command.EXIT) {
+            gameFinished = true;
         }
     }
 
@@ -68,6 +93,7 @@ class TicTacToeWithAI {
         }
 
         setCell(tempY, tempX);
+        setCurrentPlayer();
     }
 
     private void computerMakeMove() {
@@ -82,10 +108,22 @@ class TicTacToeWithAI {
         }
     }
 
+    private void setCurrentPlayer() {
+        currentPlayer = Player.FIRST.getMoves() == Player.SECOND.getMoves() ? Player.FIRST : Player.SECOND;
+    }
+
     private void setCell(int y, int x) {
-        CELLS[y][x] = firstPlayerMoves == secondPlayerMoves ? Player.FIRST.SYMBOL : Player.SECOND.SYMBOL;
+        CELLS[y][x] = currentPlayer.SYMBOL;
         increasePlayerMoves(CELLS[y][x]);
         checkStatusOfGame();
+    }
+
+    private void increasePlayerMoves(char player) {
+        if (player == Player.FIRST.SYMBOL) {
+            Player.FIRST.incrementMoves();
+        } else if (player == Player.SECOND.SYMBOL) {
+            Player.SECOND.incrementMoves();
+        }
     }
 
     private void checkStatusOfGame() {
@@ -146,10 +184,36 @@ enum Player {
     FIRST('X'), SECOND('O');
 
     public final char SYMBOL;
+    private boolean isComputer;
+    private int moves;
 
     Player(char symbol) {
         this.SYMBOL = symbol;
     }
+
+    public void setComputer(boolean isComputer) {
+        this.isComputer = isComputer;
+    }
+
+    public boolean isComputer() {
+        return isComputer;
+    }
+
+    public void incrementMoves() {
+        moves++;
+    }
+
+    public int getMoves() {
+        return moves;
+    }
+}
+
+enum Command {
+    START, EXIT
+}
+
+enum ComputerLevel {
+    EASY
 }
 
 class TicTacToeWithAIDemo {
