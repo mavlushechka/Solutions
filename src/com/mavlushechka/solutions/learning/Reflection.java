@@ -8,7 +8,7 @@ import java.lang.reflect.Method;
 
 @Retention(RetentionPolicy.RUNTIME)
 @interface SomeAnnotation {
-    String description();
+    String description() default "Description is provided.";
 }
 
 public class Reflection {
@@ -20,6 +20,10 @@ public class Reflection {
         Method methodWithNoParameters = someClass.getMethod("getName");
         Method methodWithParameters = someClass.getMethod("setName", String.class);
 
+        if (someClass.isAnnotationPresent(SomeAnnotation.class)) {
+            System.out.println("SomeClass is annotated by SomeAnnotation.");
+        }
+        System.out.printf("SomeClass description: %s\n\n", someClass.getAnnotation(SomeAnnotation.class).description());
         System.out.println(someClass.getAnnotation(SomeAnnotation.class));
         System.out.println(field.getAnnotation(SomeAnnotation.class));
         System.out.println(constructorWithNoParameters.getAnnotation(SomeAnnotation.class));
@@ -29,9 +33,9 @@ public class Reflection {
     }
 }
 
-@SomeAnnotation(description = "Class")
+@SomeAnnotation(description = "Class description")
 class SomeClass {
-    @SomeAnnotation(description = "Field")
+    @SomeAnnotation(description = "Field description")
     public String name;
 
     @SomeAnnotation(description = "Constructor with no parameters")
