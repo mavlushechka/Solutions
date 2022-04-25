@@ -1,4 +1,4 @@
-package com.mavlushechka.solutions.learning;
+package com.mavlushechka.solutions.jetbrainsacademy.Learn.Step;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 public class WorldPopulation {
     public static void main(String[] args) throws FileNotFoundException {
-        File file = new File("src/com/mavlushechka/solutions/learning/dataset_91069.txt");
+        File file = new File("src/com/mavlushechka/solutions/jetbrainsacademy/Learn/Step/dataset_91069.txt");
         Scanner scanner = new Scanner(file);
         int yearOfLargestIncreaseInPopulation = -1;
         long largestIncreaseInPopulation = Integer.MIN_VALUE;
